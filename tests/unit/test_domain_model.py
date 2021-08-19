@@ -27,7 +27,7 @@ def tag():
 
 
 def test_user_construction(user):
-    assert user.username == 'dbowie'
+    assert user.user_name == 'dbowie'
     assert user.password == '1234567890'
     assert repr(user) == '<User dbowie 1234567890>'
 

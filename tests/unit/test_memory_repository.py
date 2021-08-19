@@ -8,10 +8,10 @@ from covid.adapters.repository import RepositoryException
 
 
 def test_repository_can_add_a_user(in_memory_repo):
-    user = User('Dave', '123456789')
+    user = User('dave', '123456789')
     in_memory_repo.add_user(user)
 
-    assert in_memory_repo.get_user('Dave') is user
+    assert in_memory_repo.get_user('dave') is user
 
 
 def test_repository_can_retrieve_a_user(in_memory_repo):
@@ -56,8 +56,8 @@ def test_repository_can_retrieve_article(in_memory_repo):
         0]
     comment_two = [comment for comment in article.comments if comment.comment == 'Yeah Freddie, bad news'][0]
 
-    assert comment_one.user.username == 'fmercury'
-    assert comment_two.user.username == "thorke"
+    assert comment_one.user.user_name == 'fmercury'
+    assert comment_two.user.user_name == "thorke"
 
     # Check that the Article is tagged as expected.
     assert article.is_tagged_by(Tag('Health'))

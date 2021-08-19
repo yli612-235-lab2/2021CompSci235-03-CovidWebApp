@@ -161,8 +161,8 @@ def articles_by_tag():
 @news_blueprint.route('/comment', methods=['GET', 'POST'])
 @login_required
 def comment_on_article():
-    # Obtain the username of the currently logged in user.
-    username = session['username']
+    # Obtain the user name of the currently logged in user.
+    user_name = session['user_name']
 
     # Create form. The form maintains state, e.g. when this method is called with a HTTP GET request and populates
     # the form with an article id, when subsequently called with a HTTP POST request, the article id remains in the
@@ -175,7 +175,7 @@ def comment_on_article():
         article_id = int(form.article_id.data)
 
         # Use the service layer to store the new comment.
-        services.add_comment(article_id, form.comment.data, username, repo.repo_instance)
+        services.add_comment(article_id, form.comment.data, user_name, repo.repo_instance)
 
         # Retrieve the article in dict form.
         article = services.get_article(article_id, repo.repo_instance)

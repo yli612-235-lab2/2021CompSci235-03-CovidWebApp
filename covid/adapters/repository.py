@@ -22,10 +22,10 @@ class AbstractRepository(abc.ABC):
         raise NotImplementedError
 
     @abc.abstractmethod
-    def get_user(self, username) -> User:
-        """ Returns the User named username from the repository.
+    def get_user(self, user_name) -> User:
+        """ Returns the User named user_name from the repository.
 
-        If there is no User with the given username, this method returns None.
+        If there is no User with the given user_name, this method returns None.
         """
         raise NotImplementedError
 
@@ -51,7 +51,7 @@ class AbstractRepository(abc.ABC):
         raise NotImplementedError
 
     @abc.abstractmethod
-    def get_number_of_articles(self):
+    def get_number_of_articles(self) -> int:
         """ Returns the number of Articles in the repository. """
         raise NotImplementedError
 

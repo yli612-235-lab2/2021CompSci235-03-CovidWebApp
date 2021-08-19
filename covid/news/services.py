@@ -12,13 +12,13 @@ class UnknownUserException(Exception):
     pass
 
 
-def add_comment(article_id: int, comment_text: str, username: str, repo: AbstractRepository):
+def add_comment(article_id: int, comment_text: str, user_name: str, repo: AbstractRepository):
     # Check that the article exists.
     article = repo.get_article(article_id)
     if article is None:
         raise NonExistentArticleException
 
-    user = repo.get_user(username)
+    user = repo.get_user(user_name)
     if user is None:
         raise UnknownUserException
 
@@ -117,7 +117,7 @@ def articles_to_dict(articles: Iterable[Article]):
 
 def comment_to_dict(comment: Comment):
     comment_dict = {
-        'username': comment.user.username,
+        'user_name': comment.user.user_name,
         'article_id': comment.article.id,
         'comment_text': comment.comment,
         'timestamp': comment.timestamp

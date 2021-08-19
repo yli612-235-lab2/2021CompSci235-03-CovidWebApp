@@ -2,7 +2,7 @@
   <img id="logo" src="{{ url_for('static', filename='covid-19.png') }}" />
 
   <h2 id="nav-header">
-    {% if 'username' in session %} Hello, {{ session['username'] }} {%
+    {% if 'user_name' in session %} Hello, {{ session['user_name'] }} {%
     endif %}
   </h2>
   <a class="btn-nav" href="{{ url_for('home_bp.home') }}">Home</a>

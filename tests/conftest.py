@@ -4,11 +4,12 @@ from covid import create_app
 from covid.adapters import memory_repository
 from covid.adapters.memory_repository import MemoryRepository
 
-from config import get_project_root
+from utils import get_project_root
 
 # the csv files in the test folder are different from the csv files in the covid/adapters/data folder!
-# tests are written against the csv files in tests
+# tests are written against the csv files in tests, this data path is used to override default path for testing
 TEST_DATA_PATH = get_project_root() / "tests" / "data"
+
 
 @pytest.fixture
 def in_memory_repo():
@@ -32,10 +33,10 @@ class AuthenticationManager:
     def __init__(self, client):
         self.__client = client
 
-    def login(self, username='thorke', password='cLQ^C#oFXloS'):
+    def login(self, user_name='thorke', password='cLQ^C#oFXloS'):
         return self.__client.post(
             'authentication/login',
-            data={'username': username, 'password': password}
+            data={'user_name': user_name, 'password': password}
         )
 
     def logout(self):

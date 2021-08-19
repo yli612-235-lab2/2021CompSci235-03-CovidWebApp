@@ -55,7 +55,7 @@
         {% if article.id == show_comments_for_article %}
         <div style="clear:both">
             {% for comment in article.comments %}
-                <p>{{comment.comment_text}}, by {{comment.username}}, {{comment.timestamp}}</p>
+                <p>{{comment.comment_text}}, by {{comment.user_name}}, {{comment.timestamp}}</p>
             {% endfor %}
         </div>
         {% endif %}

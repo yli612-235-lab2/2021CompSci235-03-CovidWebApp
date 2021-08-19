@@ -3,14 +3,14 @@ from typing import List, Iterable
 
 
 class User:
-    def __init__(self, username: str, password: str):
-        self.__username: str = username
+    def __init__(self, user_name: str, password: str):
+        self.__user_name: str = user_name
         self.__password: str = password
         self.__comments: List[Comment] = list()
 
     @property
-    def username(self) -> str:
-        return self.__username
+    def user_name(self) -> str:
+        return self.__user_name
 
     @property
     def password(self) -> str:
@@ -24,12 +24,12 @@ class User:
         self.__comments.append(comment)
 
     def __repr__(self) -> str:
-        return f'<User {self.__username} {self.__password}>'
+        return f'<User {self.__user_name} {self.__password}>'
 
     def __eq__(self, other) -> bool:
         if not isinstance(other, User):
             return False
-        return other.username == self.username
+        return other.user_name == self.user_name
 
 
 class Comment:

@@ -8,28 +8,28 @@ def test_register(client):
     response_code = client.get('/authentication/register').status_code
     assert response_code == 200
 
-    # Check that we can register a user successfully, supplying a valid username and password.
+    # Check that we can register a user successfully, supplying a valid user name and password.
     response = client.post(
         '/authentication/register',
-        data={'username': 'gmichael', 'password': 'CarelessWhisper1984'}
+        data={'user_name': 'gmichael', 'password': 'CarelessWhisper1984'}
     )
     assert response.headers['Location'] == 'http://localhost/authentication/login'
 
 
-@pytest.mark.parametrize(('username', 'password', 'message'), (
-        ('', '', b'Your username is required'),
-        ('cj', '', b'Your username is too short'),
+@pytest.mark.parametrize(('user_name', 'password', 'message'), (
+        ('', '', b'Your user name is required'),
+        ('cj', '', b'Your user name is too short'),
         ('test', '', b'Your password is required'),
         ('test', 'test', b'Your password must be at least 8 characters, and contain an upper case letter,\
             a lower case letter and a digit'),
-        ('fmercury', 'Test#6^0', b'Your username is already taken - please supply another'),
+        ('fmercury', 'Test#6^0', b'Your user name is already taken - please supply another'),
 ))
-def test_register_with_invalid_input(client, username, password, message):
-    # Check that attempting to register with invalid combinations of username and password generate appropriate error
+def test_register_with_invalid_input(client, user_name, password, message):
+    # Check that attempting to register with invalid combinations of user name and password generate appropriate error
     # messages.
     response = client.post(
         '/authentication/register',
-        data={'username': username, 'password': password}
+        data={'user_name': user_name, 'password': password}
     )
     assert message in response.data
 
@@ -46,7 +46,7 @@ def test_login(client, auth):
     # Check that a session has been created for the logged-in user.
     with client:
         client.get('/')
-        assert session['username'] == 'thorke'
+        assert session['user_name'] == 'thorke'
 
 
 def test_logout(client, auth):
@@ -86,7 +86,7 @@ def test_comment(client, auth):
 
 
 @pytest.mark.parametrize(('comment', 'messages'), (
-        ('Who thinks Trump is a fuckwit?', (b'Your comment must not contain profanity')),
+        ('Who thinks Trump is a f***wit?', (b'Your comment must not contain profanity')),
         ('Hey', (b'Your comment is too short')),
         ('ass', (b'Your comment is too short', b'Your comment must not contain profanity')),
 ))

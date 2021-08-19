@@ -24,8 +24,8 @@ class MemoryRepository(AbstractRepository):
     def add_user(self, user: User):
         self.__users.append(user)
 
-    def get_user(self, username) -> User:
-        return next((user for user in self.__users if user.username == username), None)
+    def get_user(self, user_name) -> User:
+        return next((user for user in self.__users if user.user_name == user_name), None)
 
     def add_article(self, article: Article):
         insort_left(self.__articles, article)
@@ -213,7 +213,7 @@ def load_users(data_path: Path, repo: MemoryRepository):
     users_filename = str(Path(data_path) / "users.csv")
     for data_row in read_csv_file(users_filename):
         user = User(
-            username=data_row[1],
+            user_name=data_row[1],
             password=generate_password_hash(data_row[2])
         )
         repo.add_user(user)
