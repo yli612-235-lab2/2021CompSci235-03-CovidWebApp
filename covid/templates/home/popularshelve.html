@@ -1,0 +1,43 @@
+{% extends 'layout.html' %} {% block content %}
+<main id="main">
+    {% for book in selected_books %}
+        <div class="book-container">
+            <div class="img-small">
+                    <img src={{ book.image_hyperlink }} />
+
+            </div>
+
+            <div class="book-description">
+                <h1>{{book.title }}</h1>
+                <p>{{ book.description}}.</p>
+                <p>average_rating : {{ book.average_rating}}.</p>
+                <p>publisher:{{ book.publisher}}  ({{ book.publication_data}}).</p>
+                <button class="btn-general" onclick="location.href='{{ book.hyperlink }}'">Read</button>
+            </div>
+        </div>
+
+        <div style="float:left">
+        {% for author in book.authors %}
+            <button class="btn-general" onclick="location.href='{{author_urls[author.name] }}'">{{author.name}}</button>
+        {% endfor %}
+        </div>
+
+        <div style="float:right">
+            {% if book.comments|length > 0 and book.book_id != show_comments_for_book %}
+                 <button class="btn-general" onclick="location.href='{{ book.view_comment_url }}'">{{ book.comments|length }} comments</button>
+            {% endif %}
+
+            <button class="btn-general" onclick="location.href='{{ book.add_comment_url }}'">Comment</button>
+        </div>
+
+        {% if book.book_id == show_comments_for_book %}
+        <div style="clear:both">
+            {% for comment in book.comments %}
+                <p>{{comment.comment_text}}, by {{comment.user_name}}, {{comment.timestamp}}</p>
+            {% endfor %}
+        </div>
+        {% endif %}
+
+    {% endfor %}
+</main>
+{% endblock %}

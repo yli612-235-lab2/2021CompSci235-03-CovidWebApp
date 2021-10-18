@@ -1,0 +1,53 @@
+{% extends 'layout.html' %}
+{% block content %}
+<main id="main">
+    {% for book in selected_books %}
+        <div class="book-container">
+            <div class="img-small">
+                    <img src={{ book.image_hyperlink }} />
+            </div>
+            <div class="book-description">
+                <h1>{{ book.title }}</h1>
+                <p>{{ book.description}}.</p>
+
+
+            </div>
+           <div class="btn-read">
+                <button class="btn-general" onclick="location.href='{{ book.hyperlink }}'">Read</button>
+            </div>
+
+
+        </div>
+    {% endfor %}
+
+        <footer>
+        <nav style="clear:both">
+            <div style="float:left">
+                {% if first_book_url is not none %}
+                    <button class="btn-general" onclick="location.href='{{first_book_url}}'">First</button>
+                {% else %}
+                    <button class="btn-general-disabled" disabled>First</button>
+                {% endif %}
+                {% if prev_book_url is not none %}
+                    <button class="btn-general" onclick="location.href='{{prev_book_url}}'">Previous</button>
+                {% else %}
+                    <button class="btn-general-disabled" disabled>Previous</button>
+                {% endif %}
+            </div>
+            <div style="float:right">
+                {% if next_book_url is not none %}
+                    <button class="btn-general" onclick="location.href='{{next_book_url}}'">Next</button>
+                {% else %}
+                    <button class="btn-general-disabled" disabled>Next</button>
+                {% endif %}
+                {% if last_book_url is not none %}
+                    <button class="btn-general" onclick="location.href='{{last_book_url}}'">Last</button>
+                {% else %}
+                    <button class="btn-general-disabled" disabled>Last</button>
+                {% endif %}
+            </div>
+        </nav>
+    </footer>
+
+</main>
+{% endblock %}

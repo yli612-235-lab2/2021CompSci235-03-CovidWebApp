@@ -1,0 +1,11 @@
+{% extends 'layout.html' %} {% block content %}
+<main id="main">
+        <div class="select_line">
+            <ul>
+                {% for popularshelve in selectpopularshelves %}
+                <li><button class="item-fill" onclick="location.href='books_by_popularshelve?data={{popularshelve.name}}'">{{popularshelve.name}}</button></li>
+                {% endfor %}
+            </ul>
+        </div>
+</main>
+{% endblock %}
