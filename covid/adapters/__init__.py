@@ -1,0 +1,2 @@
+def jsondatareader():
+    return None
